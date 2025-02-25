@@ -1,21 +1,27 @@
+
+// only route 
+
 const express = require('express');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const router = express.Router();
-const userSchema = require('./userModel')
+const userSchema = require('./user.model')
 const User = new mongoose.model('User',userSchema);
 
 
 router.post('/signup', async(req,res) => {
     try{
         const hashedPassword = await bcrypt.hash(req.body.password,10)
-        const newUser = new User({
+        const userData = {
             fullname: req.body.fullname,
             email: req.body.email,
             password: hashedPassword,
             workspacename: req.body.workspacename
-        });
+        };
+
+        // repository 
+        const newUser = new User(userData);
         await newUser.save();
         res.status(200).json({
             message: 'successfull'
