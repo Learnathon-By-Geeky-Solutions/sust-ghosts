@@ -1,13 +1,26 @@
 const express = require('express');
+const dotenv = require('dotenv')
+const mongoose = require('mongoose');
+const userHandler = require('./modules/user/user.controller');
+
 const app = express();
 
+dotenv.config()
+
 app.use(express.json());
+app.use('/user',userHandler)
 
-app.post('/signup', async (req, res) => {
+// database connection
+mongoose.connect('mongodb+srv://sustghost:12345@catalyst.qzbmo.mongodb.net/?retryWrites=true&w=majority&appName=Catalyst')
+    .then(() => console.log('connection successful'))
+    .catch((err) => console.log(err))
 
-})
+
 app.post('/login', async (req, res) => {
 
+})
+app.get('/', (req, res) => {
+    res.send('hello')
 })
 
 app.listen(3000, () => {
