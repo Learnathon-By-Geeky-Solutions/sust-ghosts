@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv')
 const mongoose = require('mongoose');
-const userHandler = require('./modules/users/userHandler');
+const userHandler = require('./modules/user/user.controller');
 
 const app = express();
 
