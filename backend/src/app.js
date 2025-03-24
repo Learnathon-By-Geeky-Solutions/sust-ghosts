@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const dotenv = require('dotenv')
 const mongoose = require('mongoose');
 const userHandler = require('./modules/user/user.controller');
@@ -8,7 +9,10 @@ const app = express();
 
 
 dotenv.config()
-
+app.use(cors({
+    origin: 'http://localhost:5173', // Allow frontend URL
+    credentials: true, // If sending cookies or authentication
+  }));
 app.use(express.json());
 app.use('/task',taskHandler)
 app.use('/user',userHandler)
