@@ -2,8 +2,10 @@ const express = require('express');
 const dotenv = require('dotenv')
 const mongoose = require('mongoose');
 const userHandler = require('./modules/user/user.controller');
-const taskHandler = require('./modules/task/task.controller')
+const taskHandler = require('./modules/task/task.controller');
+const reminderHandler = require('./modules/reminder/reminder.controller');
 const app = express();
+
 
 dotenv.config()
 

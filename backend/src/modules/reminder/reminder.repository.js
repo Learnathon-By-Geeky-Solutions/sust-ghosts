@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const userSchema = require('../user/user.model')
 const User = mongoose.model('User',userSchema);
-const Reminder = mongoose.model(require('/reminder.model'));
+const Reminder = mongoose.model(require('./reminder.model'));
 
 
 
