@@ -12,6 +12,7 @@ dotenv.config()
 app.use(express.json());
 app.use('/task',taskHandler)
 app.use('/user',userHandler)
+app.use('/reminder',reminderHandler);
 
 // database connection
 mongoose.connect('mongodb+srv://sustghost:12345@catalyst.qzbmo.mongodb.net/?retryWrites=true&w=majority&appName=Catalyst')

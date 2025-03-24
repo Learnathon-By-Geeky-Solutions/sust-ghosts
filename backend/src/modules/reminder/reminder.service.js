@@ -1,26 +1,25 @@
-const Reminder = require('./reminder.model');
-
+// reminder.service.js
+const reminderRepository = require('./reminder.repository');
 
 const createReminder = async (reminderData) => {
-    return await Reminder.create(reminderData);
+    // Additional business logic can be added here if needed
+    return await reminderRepository.create(reminderData);
 };
 
 const getAllReminders = async () => {
-    return await Reminder.find().populate('assignee', 'email');
+    return await reminderRepository.findAll();
 };
-
 
 const getReminderById = async (reminderId) => {
-    return await Reminder.findById(reminderId).populate('assignee', 'email');
+    return await reminderRepository.findById(reminderId);
 };
 
-
 const updateReminder = async (reminderId, updatedData) => {
-    return await Reminder.findByIdAndUpdate(reminderId, updatedData, { new: true });
+    return await reminderRepository.update(reminderId, updatedData);
 };
 
 const deleteReminder = async (reminderId) => {
-    return await Reminder.findByIdAndDelete(reminderId);
+    return await reminderRepository.remove(reminderId);
 };
 
 module.exports = {

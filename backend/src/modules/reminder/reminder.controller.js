@@ -1,10 +1,7 @@
+// reminder.controller.js
 const express = require('express');
 const router = express.Router();
 const reminderService = require('./reminder.service');
-
-Base_URL = "reminder"
-
-// Controller and Routing combined
 
 // Create a new reminder
 router.post('/', async (req, res) => {
@@ -17,7 +14,7 @@ router.post('/', async (req, res) => {
 });
 
 // Retrieve all reminders
-router.get(Base_URL+'/getAll', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const reminders = await reminderService.getAllReminders();
         res.status(200).json(reminders);
@@ -27,7 +24,7 @@ router.get(Base_URL+'/getAll', async (req, res) => {
 });
 
 // Retrieve a reminder by ID
-router.get(Base_URL+'/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const reminder = await reminderService.getReminderById(req.params.id);
         if (!reminder) {
@@ -40,7 +37,7 @@ router.get(Base_URL+'/:id', async (req, res) => {
 });
 
 // Update a reminder
-router.put(Base_URL+'/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const reminder = await reminderService.updateReminder(req.params.id, req.body);
         if (!reminder) {
@@ -53,7 +50,7 @@ router.put(Base_URL+'/:id', async (req, res) => {
 });
 
 // Delete a reminder
-router.delete(Base_URL+'/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const reminder = await reminderService.deleteReminder(req.params.id);
         if (!reminder) {

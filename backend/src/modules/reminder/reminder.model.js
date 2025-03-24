@@ -1,26 +1,24 @@
 const mongoose = require('mongoose');
 
-const reminderSchema = mongoose.Schema({
-    
+const reminderSchema = new mongoose.Schema({
     assignee: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        require: true
+        required: true
     },
-
     desc: {
-        type: String, 
-        require: true    
+        type: String,
+        required: true    
     },
-
     time: {
         type: String,
-        require: true
+        required: true
     },
     status: {
         type: String,
         enum: ['To Do', 'Done', 'Delegated'],
-        require: true
-    },
-})
-module.exports = reminderSchema
+        required: true
+    }
+});
+
+module.exports = mongoose.model('Reminder', reminderSchema);

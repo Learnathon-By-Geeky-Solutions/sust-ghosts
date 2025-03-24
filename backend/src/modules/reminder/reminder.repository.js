@@ -1,38 +1,30 @@
-const mongoose = require('mongoose');
-const userSchema = require('../user/user.model')
-const User = mongoose.model('User',userSchema);
-const Reminder = mongoose.model(require('./reminder.model'));
+// reminder.repository.js
+const Reminder = require('./reminder.model');
 
-
-
-
-
-// CRUD operations for reminder
-const createReminder = async (reminderData) => {
-    const reminder = new Reminder(reminderData);
-    return await reminder.save();
+const create = async (reminderData) => {
+    return await Reminder.create(reminderData);
 };
 
-const getAllReminders = async () => {
+const findAll = async () => {
     return await Reminder.find().populate('assignee', 'email');
 };
 
-const getReminderById = async (reminderId) => {
+const findById = async (reminderId) => {
     return await Reminder.findById(reminderId).populate('assignee', 'email');
 };
 
-const updateReminder = async (reminderId, updatedData) => {
+const update = async (reminderId, updatedData) => {
     return await Reminder.findByIdAndUpdate(reminderId, updatedData, { new: true });
 };
 
-const deleteReminder = async (reminderId) => {
+const remove = async (reminderId) => {
     return await Reminder.findByIdAndDelete(reminderId);
 };
 
 module.exports = {
-    createReminder,
-    getAllReminders,
-    getReminderById,
-    updateReminder,
-    deleteReminder
+    create,
+    findAll,
+    findById,
+    update,
+    remove
 };
