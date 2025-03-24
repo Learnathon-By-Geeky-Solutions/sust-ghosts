@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const taskSchema = mongoose.Schema({
+const reminderSchema = mongoose.Schema({
     
     assignee: {
         type: mongoose.Schema.Types.ObjectId,
@@ -23,4 +23,4 @@ const taskSchema = mongoose.Schema({
         require: true
     },
 })
-module.exports = taskSchema
+module.exports = reminderSchema
