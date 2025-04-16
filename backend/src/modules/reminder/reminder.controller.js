@@ -1,17 +1,9 @@
 // reminder.controller.js
 const express = require('express');
 const router = express.Router();
-const reminderService = require('./reminder.service');
-
+const { createReminder } = require('./reminder.service')
 // Create a new reminder
-router.post('/', async (req, res) => {
-    try {
-        const reminder = await reminderService.createReminder(req.body);
-        res.status(201).json(reminder);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-});
+router.post('/',createReminder);
 
 // Retrieve all reminders
 router.get('/', async (req, res) => {

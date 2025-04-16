@@ -1,8 +1,12 @@
 // reminder.repository.js
-const Reminder = require('./reminder.model');
+const mongoose = require('mongoose');
+const reminderSchema = require('./reminder.model')
+const Reminder = mongoose.model('Reminder',reminderSchema);
 
 const create = async (reminderData) => {
-    return await Reminder.create(reminderData);
+    const newReminder = new Reminder(reminderData)
+    console.log(newReminder)
+    return newReminder;
 };
 
 const findAll = async () => {

@@ -11,7 +11,7 @@ const reminderSchema = new mongoose.Schema({
         required: true    
     },
     time: {
-        type: String,
+        type: Date,
         required: true
     },
     status: {
@@ -21,4 +21,4 @@ const reminderSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Reminder', reminderSchema);
+module.exports = { reminderSchema };
