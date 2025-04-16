@@ -20,7 +20,7 @@ const createProject = async (req, res) => {
             startDate
         };
 
-        const newProject = await createNewProject(taskData);
+        const newProject = await createNewProject(projectData);
         res.status(201).json({ message: 'Project created successfully', project: newProject });
     } catch (error) {
         console.error(error);
