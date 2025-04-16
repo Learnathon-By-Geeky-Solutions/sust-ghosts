@@ -5,8 +5,10 @@ const createReminder = async (req,res) => {
     try{
         const { assignee,desc,time, status} = req.body;
         // Find user by their full name
-        const user = await findUserByMail(assignee);
-        console.log(user)
+        const users = await findUserByMail(assignee);
+        const user = users[0];
+
+        console.log(users)
         console.log(assignee)
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
@@ -17,6 +19,7 @@ const createReminder = async (req,res) => {
             time,
             status 
         }
+        console.log(newReminderData)
         // Additional business logic can be added here if needed
         return await create(newReminderData);
     } catch (error) {

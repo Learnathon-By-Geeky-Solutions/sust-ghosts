@@ -5,8 +5,9 @@ const Reminder = mongoose.model('Reminder',reminderSchema);
 
 const create = async (reminderData) => {
     const newReminder = new Reminder(reminderData)
+    console.log(reminderData,"kk")
     console.log(newReminder)
-    return newReminder;
+    return await newReminder.save()
 };
 
 const findAll = async () => {
