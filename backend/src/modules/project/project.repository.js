@@ -13,15 +13,17 @@ const createNewProject = async (projectData) => {
     return await project.save();
 };
 
-const projectUpdate = async(id, body) => {
-    user = await User.find({email: body.assignee})
-    console.log(user)
-    body.assignee = user._id
-    return await Task.findByIdAndUpdate(id, body, { new: true });
+const projectUpdate = async(project) => {
+    findProject = await Project.findOne({projectManager: project.projectManager, projectName: project.projectName})
+    console.log(findProject)
+    console.log(project)
+    return await Project.findByIdAndUpdate(findProject._id, project, { new: true });
 }
 
-const projectDelete = async(id) => {
-    return await Task.findByIdAndDelete(id)
+const projectDelete = async(project) => {
+    findProject = await Project.findOne({projectManager: project.projectManager, projectName: project.projectName})
+    
+    return await Project.findByIdAndDelete(findProject._id)
 }
 
 module.exports = { createNewProject , projectUpdate, projectDelete};
