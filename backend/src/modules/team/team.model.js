@@ -7,7 +7,7 @@ const teamSchema = mongoose.Schema({
         required: true  
     },
     workspace: {
-        type : mongoose.Schema.Types.ObjectId,
+        type : String, //mongoose.Schema.Types.ObjectId,
         ref: "Workspace",
         // required: true
     },
@@ -17,12 +17,15 @@ const teamSchema = mongoose.Schema({
         required: true
     },
     projectList: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,//mongoose.Schema.Types.ObjectId,
         ref: 'Project'
     }],
     members: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,// mongoose.Schema.Types.ObjectId,
         ref: 'User'
+        
     }]
 });
+
+module.exports = teamSchema;
 
