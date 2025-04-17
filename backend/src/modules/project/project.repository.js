@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-const projectSchema = require('./project.model'); 
-const userSchema = require('../user/user.model')
-const User = mongoose.model('User',userSchema);
+const projectSchema = require('./project.model');
 const Project = mongoose.model('Project',projectSchema)
 
 // Find user by name
