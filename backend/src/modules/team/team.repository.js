@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 // const projectSchema = require('../project/project.model'); 
-// const userSchema = require('../user/user.model');
 const teamSchema = require('./team.model');
 const Team = mongoose.model('Team',teamSchema);
-
+const userSchema = require('../user/user.model')
+const User = mongoose.model('User',userSchema);
 
 
 const createNewTeam = async (Data) => {

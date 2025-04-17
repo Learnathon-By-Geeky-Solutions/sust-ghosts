@@ -2,7 +2,7 @@ const { createNewTeam , teamUpdate, teamDelete} = require('./team.repository');
 const { findUserByMail } = require('../user/user.repository')
 const createTeam = async (req, res) => {
     try {
-        const { teamManager, teamName, projectList,members } = req.body;
+        const { teamManager, teamName, projectList,members,workspace } = req.body;
 
         // Find user by their full name
         const users = await findUserByMail(teamManager);
@@ -15,6 +15,7 @@ const createTeam = async (req, res) => {
 
         const teamData = {
             teamManager: user._id,
+            workspace,
             teamName, 
             projectList, 
             members
@@ -48,7 +49,7 @@ const deleteTeam = async (req, res) => {
             return res.status(404).json({ error: 'Team not found' });
         }
 
-        res.status(200).json({ message: 'Team deleted successfully', team: deletedTask });
+        res.status(200).json({ message: 'Team deleted successfully', team: deletedTeam });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
