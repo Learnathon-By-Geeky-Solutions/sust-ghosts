@@ -6,6 +6,7 @@ const userSchema = require('../user/user.model')
 const User = mongoose.model('User',userSchema);
 
 
+
 const createNewTeam = async (Data) => {
     const team = new Team(Data);
     return await team.save();
@@ -21,7 +22,7 @@ const teamDelete = async(id) => {
 
 const findTeamByWorkspaceAndTeamName = async (workspaceName, teamName) => {
     return await Team.find({
-        workspace: workspaceName,
+        workspace: workspace,
         teamName: teamName,
     });
 };
@@ -29,4 +30,4 @@ const findTeamByWorkspaceAndTeamName = async (workspaceName, teamName) => {
 
 
 
-module.exports = { createNewTeam, teamUpdate, teamDelete, findTeamByManagerAndWorkspace, findTeamByWorkspaceAndTeamName };
+module.exports = { createNewTeam, teamUpdate, teamDelete, findTeamByWorkspaceAndTeamName };

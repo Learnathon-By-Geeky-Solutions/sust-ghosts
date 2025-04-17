@@ -5,7 +5,7 @@ const { searchTeamByWorkspaceAndTeamName } = require('./team.service');
 
 router.post('/', createTeam)
 router.put('/:id', updateTeam) 
-router.delete('/:id', deleteTeam) 
+router.delete('/:id', deleteTeam)
 
 
 router.get('/search-by-name', searchTeamByWorkspaceAndTeamName);

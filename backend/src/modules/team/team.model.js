@@ -9,9 +9,9 @@ const teamSchema = mongoose.Schema({
     workspace: {
         type : mongoose.Schema.Types.ObjectId,
         ref: "Workspace",
-        required: true
+        // required: true
     },
-    
+
     teamName: {
         type: String,
         required: true

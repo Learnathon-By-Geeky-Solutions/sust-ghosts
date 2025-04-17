@@ -79,4 +79,4 @@ const searchTeamByWorkspaceAndTeamName = async (req, res) => {
     }
 };
 
-module.exports = { createTeam, updateTeam, deleteTeam, searchTeamByManagerAndWorkspace, searchTeamByWorkspaceAndTeamName };
+module.exports = { createTeam, updateTeam, deleteTeam,  searchTeamByWorkspaceAndTeamName };
