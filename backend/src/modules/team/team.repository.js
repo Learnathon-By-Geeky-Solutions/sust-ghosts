@@ -19,6 +19,14 @@ const teamDelete = async(id) => {
     return await Team.findByIdAndDelete(id)
 }
 
+const findTeamByWorkspaceAndTeamName = async (workspaceName, teamName) => {
+    return await Team.find({
+        workspace: workspaceName,
+        teamName: teamName,
+    });
+};
 
 
-module.exports = { createNewTeam , teamUpdate, teamDelete};
+
+
+module.exports = { createNewTeam, teamUpdate, teamDelete, findTeamByManagerAndWorkspace, findTeamByWorkspaceAndTeamName };

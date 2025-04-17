@@ -1,5 +1,7 @@
 const { createNewTeam , teamUpdate, teamDelete} = require('./team.repository');
 const { findUserByMail } = require('../user/user.repository')
+const { findTeamByWorkspaceAndTeamName } = require('./team.repository');
+
 const createTeam = async (req, res) => {
     try {
         const { teamManager, teamName, projectList,members,workspace } = req.body;
@@ -28,6 +30,8 @@ const createTeam = async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 };
+
+
 const updateTeam = async(req, res)=>{
     try {
         const updatedTeam = await teamUpdate(req.params.id, req.body);
@@ -54,4 +58,25 @@ const deleteTeam = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
-module.exports = { createTeam, updateTeam, deleteTeam };
+const searchTeamByWorkspaceAndTeamName = async (req, res) => {
+    try {
+        const { workspaceName, teamName } = req.query;
+
+        if (!workspaceName || !teamName) {
+            return res.status(400).json({ error: 'Workspace name and team name are required' });
+        }
+
+        const teams = await findTeamByWorkspaceAndTeamName(workspaceName, teamName);
+
+        if (teams.length === 0) {
+            return res.status(404).json({ message: 'No teams found' });
+        }
+
+        res.status(200).json(teams);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
+module.exports = { createTeam, updateTeam, deleteTeam, searchTeamByManagerAndWorkspace, searchTeamByWorkspaceAndTeamName };
