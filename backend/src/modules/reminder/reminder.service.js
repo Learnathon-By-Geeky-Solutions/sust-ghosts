@@ -1,9 +1,32 @@
 // reminder.service.js
-const reminderRepository = require('./reminder.repository');
+const { createNewReminder , findAll , findById , update , remove} = require('./reminder.repository')
+const { findUserByMail } = require('../user/user.utility')
+const createReminder = async (req, res) => {
+    try {
+        const { assignee,desc,time, status} = req.body;
+        // Find user by their full name
+        const users = await findUserByMail(assignee);
+        const user = users[0];
 
-const createReminder = async (reminderData) => {
-    // Additional business logic can be added here if needed
-    return await reminderRepository.create(reminderData);
+        console.log(users)
+        console.log(assignee)
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        const newReminderData = {
+            assignee: user._id,
+            desc,
+            time,
+            status 
+        }
+        console.log(newReminderData)
+
+        const newReminder = await createNewReminder(newReminderData);
+        res.status(201).json({ message: 'Reminder created successfully', reminder: newReminder });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
 };
 
 const getAllReminders = async () => {

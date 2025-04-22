@@ -11,7 +11,7 @@ const taskSchema = mongoose.Schema({
         require: true
     },
     dueDate: {
-        type: String,
+        type: Date,
         require: true
     },
     status: {
@@ -21,7 +21,6 @@ const taskSchema = mongoose.Schema({
     },
     comment: {
         type: String,
-
     }
 })
 module.exports = taskSchema

@@ -5,10 +5,7 @@ const User = mongoose.model('User',userSchema);
 const Task = mongoose.model('Task',taskSchema)
 
 // Find user by name
-const findUserByMail = async (email) => {
-    const user = await User.find({ email: email });
-    return user
-};
+
 
 // Create a new task
 const createNewTask = async (taskData) => {
@@ -27,4 +24,4 @@ const taskDelete = async(id) => {
     return await Task.findByIdAndDelete(id)
 }
 
-module.exports = { findUserByMail, createNewTask , taskUpdate, taskDelete};
+module.exports = { createNewTask , taskUpdate, taskDelete};
