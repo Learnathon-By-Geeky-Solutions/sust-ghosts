@@ -7,8 +7,6 @@ const reminderHandler = require('./modules/reminder/reminder.controller');
 
 const projectHandler = require('./modules/project/project.controller')
 const teamHandler = require('./modules/team/team.controller');
-
-const projectHandler = require('./modules/project/project.controller');
 const workspaceHandler = require('./modules/workspace/workspace.controller');
 
 const app = express();

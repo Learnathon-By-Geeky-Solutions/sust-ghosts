@@ -2,14 +2,16 @@
 const mongoose = require('mongoose')
 const userSchema = require('./user.model')
 const User = new mongoose.model('User',userSchema);
+const {createWorkspace} = require('../workspace/workspace.service');
 
-const findUserByMail = async (email) => {
-    const user = await User.find({ email: email });
-    return user
-};
 const newUserCreation = async(userData) => {
     const newUser = new User(userData);
     await newUser.save();
+    const workspace = {
+        workspaceOwner: newUser.email,
+        workspaceName: newUser.workspaceName
+    }
+    await createWorkspace(workspace);
 }
 const findUser = async(email)=>{
     try{
@@ -20,4 +22,4 @@ const findUser = async(email)=>{
         console.log('there are an error in server end')
     }
 }
-module.exports = {newUserCreation, findUser, findUserByMail}
+module.exports = {newUserCreation, findUser}

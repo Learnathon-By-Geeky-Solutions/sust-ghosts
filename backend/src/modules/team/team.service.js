@@ -1,26 +1,37 @@
 const { createNewTeam , teamUpdate, teamDelete} = require('./team.repository');
-const { findUserByMail } = require('../user/user.repository')
+const { findUserByMail } = require('../user/user.utility')
+const { findWorkspaceByOwner } = require('../workspace/workspace.repository');
 const { findTeamByWorkspaceAndTeamName } = require('./team.repository');
 
 const createTeam = async (req, res) => {
     try {
-        const { teamManager, teamName, projectList,members,workspace } = req.body;
-
+        const { teamManager, workspaceOwner,teamName,members } = req.body;
+        console.log(req.body);
         // Find user by their full name
-        const users = await findUserByMail(teamManager);
-        const user = users[0];
-        if (!user) {
+        const teamManagers = await findUserByMail(teamManager);
+        const manager = teamManagers[0];
+        const workspaceOwners = await findUserByMail(workspaceOwner);
+        const owner = workspaceOwners[0]; 
+        console.log(manager, owner);
+        if (!manager|| !owner) {
             return res.status(404).json({ error: 'User not found' });
         }
 
-
-
+        membersId = [];
+        for (let i = 0; i < members.length; i++) {
+            console.log(members[i]);
+            const users = await findUserByMail(members[i]); // Use each member's email or identifier
+            const user = users[0]; // Assuming findUserByMail returns an array of users
+            if (user) {
+                membersId.push(user._id); // Push the user's ID to the array
+            }
+        }
+        console.log(membersId);
         const teamData = {
-            teamManager: user._id,
-            workspace,
+            teamManager: manager._id,
+            workspaceOwner: owner._id,
             teamName, 
-            projectList, 
-            members
+            members : membersId, // Use the array of user IDs
         };
 
         const newTeam = await createNewTeam(teamData);

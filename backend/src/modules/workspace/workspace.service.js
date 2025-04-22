@@ -1,8 +1,9 @@
-const { createNewWorkspace, addMember, workspaceDelete } = require('./workspace.repository');
-const { findUserByMail } = require('../user/user.repository')
-const createWorkspace = async (req, res) => {
+const { createNewWorkspace, addMember, workspaceDelete , addTeam} = require('./workspace.repository');
+const { findUserByMail } = require('../user/user.utility');
+
+const createWorkspace = async (workspace) => {
     try {
-        const { workspaceOwner, workspaceName } = req.body;
+        const { workspaceOwner, workspaceName } = workspace;
 
         // Find user by their full name
         const users = await findUserByMail(workspaceOwner);
@@ -18,10 +19,10 @@ const createWorkspace = async (req, res) => {
         };
         console.log(workspaceData)
         const newWorkspace = await createNewWorkspace(workspaceData);
-        res.status(201).json({ message: 'Workspace created successfully', workspace: newWorkspace });
+        // res.status(201).json({ message: 'Workspace created successfully', workspace: newWorkspace });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Server error' });
+        // res.status(500).json({ error: 'Server error' });
     }
 };
 const addMemberInWorkspace = async(req, res)=>{
@@ -66,4 +67,19 @@ const deleteWorkspace = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
-module.exports = { createWorkspace, addMemberInWorkspace, deleteWorkspace };
+const addTeamInWorkspace = async(workspaceOwnerId,teamId) => {
+    try {
+        // const {workspaceOwner,teamId} = req.body;
+        // const users = await findUserByMail(workspaceOwner);
+        // const user = users[0];
+        
+        const updatedWorkspace = await addTeam(teamId, workspaceOwnerId);
+        // res.status(201).json({ message: 'Workspace updated successfully', workspace: updatedWorkspace });
+    }
+    catch (error) {
+        console.error(error);
+        // res.status(500).json({ error: 'Server error' });
+    }
+
+}
+module.exports = { createWorkspace, addMemberInWorkspace, deleteWorkspace, addTeamInWorkspace };

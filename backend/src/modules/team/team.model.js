@@ -10,12 +10,6 @@ const teamSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
-    workspace: {
-        type : mongoose.Schema.Types.ObjectId, //mongoose.Schema.Types.ObjectId,
-        ref: "Workspace",
-        // required: true
-    },
-
     teamName: {
         type: String,
         required: true

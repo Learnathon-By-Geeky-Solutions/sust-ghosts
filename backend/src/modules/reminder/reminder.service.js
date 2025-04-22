@@ -1,6 +1,6 @@
 // reminder.service.js
 const { createNewReminder , findAll , findById , update , remove} = require('./reminder.repository')
-const { findUserByMail } = require('../user/user.repository')
+const { findUserByMail } = require('../user/user.utility')
 const createReminder = async (req, res) => {
     try {
         const { assignee,desc,time, status} = req.body;

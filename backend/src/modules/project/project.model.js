@@ -21,10 +21,10 @@ const projectSchema = mongoose.Schema({
         type: Date,
         require: true
     },
-    // teamId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Team',
-    //     require: true 
-    // }
+    teamId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Team',
+        require: true 
+    }
 })
 module.exports = projectSchema

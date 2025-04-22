@@ -16,13 +16,12 @@ const workspaceSchema = mongoose.Schema({
             ref: 'User',
             require: true  
         }
-    ]
-    // teamId:[ 
-        // {
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: 'Team',
-        //     require: true 
-        // }
-    // ]   
+    ],
+    teamId:[ 
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Team',
+        }
+    ]   
 })
 module.exports = workspaceSchema

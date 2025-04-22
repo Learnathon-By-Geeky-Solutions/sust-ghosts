@@ -1,5 +1,5 @@
 const { createNewTask, taskUpdate, taskDelete } = require('./task.repository');
-const { findUserByMail } = require('../user/user.repository')
+const { findUserByMail } = require('../user/user.utility')
 const createTask = async (req, res) => {
     try {
         const { name, assignee, dueDate, status, comment } = req.body;

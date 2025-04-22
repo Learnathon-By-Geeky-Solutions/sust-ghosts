@@ -1,8 +1,8 @@
 const { createNewProject, projectUpdate, projectDelete } = require('./project.repository');
-const { findUserByMail } = require('../user/user.repository')
+const { findUserByMail } = require('../user/user.utility')
 const createProject = async (req, res) => {
     try {
-        const { projectManager, projectName, projectDescription, endDate, startDate } = req.body;
+        const { projectManager, projectName, projectDescription, endDate, startDate, teamId } = req.body;
 
         // Find user by their full name
         const users = await findUserByMail(projectManager);
@@ -17,7 +17,8 @@ const createProject = async (req, res) => {
             projectName, 
             projectDescription, 
             endDate, 
-            startDate
+            startDate,
+            teamId
         };
 
         const newProject = await createNewProject(projectData);
