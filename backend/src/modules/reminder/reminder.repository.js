@@ -1,8 +1,13 @@
 // reminder.repository.js
-const Reminder = require('./reminder.model');
+const mongoose = require('mongoose');
+const reminderSchema = require('./reminder.model')
+const Reminder = mongoose.model('Reminder',reminderSchema);
 
-const create = async (reminderData) => {
-    return await Reminder.create(reminderData);
+const createNewReminder = async (reminderData) => {
+    const newReminder = new Reminder(reminderData)
+    console.log(reminderData,"kk")
+    console.log(newReminder._id)
+    return await newReminder.save()
 };
 
 const findAll = async () => {
@@ -22,7 +27,7 @@ const remove = async (reminderId) => {
 };
 
 module.exports = {
-    create,
+    createNewReminder,
     findAll,
     findById,
     update,
