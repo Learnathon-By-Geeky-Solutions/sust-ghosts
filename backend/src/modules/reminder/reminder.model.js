@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const reminderSchema = new mongoose.Schema({
+const reminderSchema = mongoose.Schema({
     assignee: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -21,4 +21,4 @@ const reminderSchema = new mongoose.Schema({
     }
 });
 
-module.exports = { reminderSchema };
+module.exports = reminderSchema ;

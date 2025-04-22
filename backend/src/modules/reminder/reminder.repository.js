@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const reminderSchema = require('./reminder.model')
 const Reminder = mongoose.model('Reminder',reminderSchema);
 
-const create = async (reminderData) => {
+const createNewReminder = async (reminderData) => {
     const newReminder = new Reminder(reminderData)
     console.log(reminderData,"kk")
-    console.log(newReminder)
+    console.log(newReminder._id)
     return await newReminder.save()
 };
 
@@ -27,7 +27,7 @@ const remove = async (reminderId) => {
 };
 
 module.exports = {
-    create,
+    createNewReminder,
     findAll,
     findById,
     update,
