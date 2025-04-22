@@ -4,8 +4,13 @@ const mongoose = require('mongoose');
 const userHandler = require('./modules/user/user.controller');
 const taskHandler = require('./modules/task/task.controller');
 const reminderHandler = require('./modules/reminder/reminder.controller');
+
+const projectHandler = require('./modules/project/project.controller')
+const teamHandler = require('./modules/team/team.controller');
+
 const projectHandler = require('./modules/project/project.controller');
 const workspaceHandler = require('./modules/workspace/workspace.controller');
+
 const app = express();
 
 
@@ -16,6 +21,9 @@ app.use('/task',taskHandler)
 app.use('/user',userHandler)
 app.use('/reminder',reminderHandler);
 app.use('/project',projectHandler)
+
+app.use('/team',teamHandler)
+
 app.use('/',workspaceHandler)
 
 // database connection
