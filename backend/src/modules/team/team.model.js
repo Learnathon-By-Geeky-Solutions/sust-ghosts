@@ -6,8 +6,12 @@ const teamSchema = mongoose.Schema({
         ref: 'User',
         required: true  
     },
+    workspaceOwner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
     workspace: {
-        type : String, //mongoose.Schema.Types.ObjectId,
+        type : mongoose.Schema.Types.ObjectId, //mongoose.Schema.Types.ObjectId,
         ref: "Workspace",
         // required: true
     },
@@ -17,11 +21,11 @@ const teamSchema = mongoose.Schema({
         required: true
     },
     projectList: [{
-        type: String,//mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,//mongoose.Schema.Types.ObjectId,
         ref: 'Project'
     }],
     members: [{
-        type: String,// mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,// mongoose.Schema.Types.ObjectId,
         ref: 'User'
         
     }]
