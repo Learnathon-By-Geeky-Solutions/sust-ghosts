@@ -24,4 +24,19 @@ const projectDelete = async(project) => {
     return await Project.findByIdAndDelete(findProject._id)
 }
 
-module.exports = { createNewProject , projectUpdate, projectDelete};
+const findTeamIdByProjectId = async (projectId) => {
+    try {
+        const project = await Project.findById(projectId);
+        return project ? project.teamId : null;
+    } catch (error) {
+        throw error;
+    }
+};
+
+module.exports = { 
+    createNewProject, 
+    projectUpdate, 
+    projectDelete, 
+    findTeamIdByProjectId 
+};
+

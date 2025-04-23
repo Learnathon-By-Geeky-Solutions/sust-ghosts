@@ -1,4 +1,4 @@
-const { createNewProject, projectUpdate, projectDelete } = require('./project.repository');
+const { createNewProject, projectUpdate, projectDelete, findTeamIdByProjectId } = require('./project.repository');
 const { findUserByMail } = require('../user/user.utility')
 const createProject = async (req, res) => {
     try {
@@ -68,5 +68,33 @@ const deleteProject = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
+};
+
+const getTeamIdByProjectId = async (req, res) => {
+    try {
+        const { projectId } = req.body;
+        
+        if (!projectId) {
+            return res.status(400).json({ error: 'Project ID is required' });
+        }
+        
+        const teamId = await findTeamIdByProjectId(projectId);
+        
+        if (!teamId) {
+            return res.status(404).json({ message: 'Project not found or no team associated' });
+        }
+        
+        res.status(200).json({ teamId });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
+module.exports = { 
+    createProject, 
+    updateProject, 
+    deleteProject,
+    getTeamIdByProjectId 
 };
 module.exports = { createProject, updateProject, deleteProject };
