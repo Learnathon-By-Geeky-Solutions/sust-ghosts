@@ -14,7 +14,7 @@ const signup = async(req,res) => {
             password: hashedPassword,
             workspacename: req.body.workspacename
         };
-
+        console.log(userData)
         // repository 
         newUserCreation(userData)
         // const newUser = new User(userData);
