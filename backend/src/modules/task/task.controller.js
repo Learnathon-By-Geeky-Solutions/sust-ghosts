@@ -16,4 +16,9 @@ router.post('/', createTask)
 router.put('/:id', updateTask)
 router.delete('/:id', deleteTask)
 
+
+router.post('/project', getTasksByProjectId)
+router.post('/assignee', getTasksByAssignee)
+router.post('/assigned-by', getTasksByAssignedBy)
+
 module.exports = router
