@@ -7,8 +7,11 @@ const Workspace = mongoose.model('Workspace',workspaceSchema)
 
 // Create a new task
 const createNewWorkspace = async (workspaceData) => {
+    // const workspaceNewData = {
+    //     w
+    // }
     const workspace = new Workspace(workspaceData);
-    console.log(workspace)
+    console.log(" workspace = ", workspace)
     return await workspace.save();
 };
 
