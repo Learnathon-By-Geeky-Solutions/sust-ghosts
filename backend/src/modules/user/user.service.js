@@ -48,7 +48,8 @@ const login = async(req,res) => {
                 console.log(token)
                 res.status(200).json({
                     "access_token": token,
-                    "message": 'login successful'
+                    "message": 'login successful',
+                    "user": user
                 })
             } else {
                 res.status(401).json({
