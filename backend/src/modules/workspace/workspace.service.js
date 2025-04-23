@@ -12,6 +12,10 @@ const createWorkspace = async (workspace) => {
             return res.status(404).json({ error: 'User not found' });
         }
 
+        // if (!workspaceName) {
+        //     return res.status(400).json({ error: 'Workspace name is required' });
+        // }
+
         const workspaceData = {
             workspaceOwner: user._id,
             workspaceName, 

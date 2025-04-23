@@ -14,7 +14,7 @@ const signup = async(req,res) => {
             password: hashedPassword,
             workspacename: req.body.workspacename
         };
-
+        console.log(userData)
         // repository 
         newUserCreation(userData)
         // const newUser = new User(userData);
@@ -48,7 +48,8 @@ const login = async(req,res) => {
                 console.log(token)
                 res.status(200).json({
                     "access_token": token,
-                    "message": 'login successful'
+                    "message": 'login successful',
+                    "user": user
                 })
             } else {
                 res.status(401).json({
