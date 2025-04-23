@@ -33,4 +33,23 @@ const findTeamByWorkspaceAndTeamName = async (workspaceName, teamName) => {
 
 
 
-module.exports = { createNewTeam, teamUpdate, teamDelete, findTeamByWorkspaceAndTeamName };
+const isUserInTeam = async (teamId, userId) => {
+    try {
+        const team = await Team.findOne({
+            _id: teamId,
+            members: userId
+        });
+        
+        return !!team; // Returns true if team is found, false otherwise
+    } catch (error) {
+        throw error;
+    }
+};
+
+// Add to your existing exports
+module.exports = { 
+    createNewTeam, 
+    teamUpdate, 
+    teamDelete,
+    isUserInTeam 
+};

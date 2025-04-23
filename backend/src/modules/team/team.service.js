@@ -1,4 +1,4 @@
-const { createNewTeam , teamUpdate, teamDelete} = require('./team.repository');
+const { createNewTeam, teamUpdate, teamDelete, isUserInTeam } = require('./team.repository');
 const { findUserByMail } = require('../user/user.utility')
 const { findWorkspaceByOwner } = require('../workspace/workspace.repository');
 const { findTeamByWorkspaceAndTeamName } = require('./team.repository');
@@ -90,4 +90,22 @@ const searchTeamByWorkspaceAndTeamName = async (req, res) => {
     }
 };
 
-module.exports = { createTeam, updateTeam, deleteTeam,  searchTeamByWorkspaceAndTeamName };
+const checkUserInTeam = async (teamId, userId) => {
+    try {
+        if (!teamId || !userId) {
+            throw new Error('Team ID and User ID are required');
+        }
+        return await isUserInTeam(teamId, userId);
+    } catch (error) {
+        console.error("Error checking if user is in team:", error);
+        throw error;
+    }
+};
+
+// Add to your existing exports
+module.exports = { 
+    createTeam, 
+    updateTeam, 
+    deleteTeam,
+    checkUserInTeam 
+};

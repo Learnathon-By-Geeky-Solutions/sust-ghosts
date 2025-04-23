@@ -6,7 +6,7 @@ const createWorkspace = async (workspace) => {
         const { workspaceOwner, workspaceName } = workspace;
 
         // Find user by their full name
-        const users = await findUserByMail(workspaceOwner);
+        const users = await findUserByMail(workspaceOwner);0
         const user = users[0];
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
