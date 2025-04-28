@@ -5,9 +5,20 @@ const taskSchema = mongoose.Schema({
         type: String, 
         require: true    
     },
+    
     assignee: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        require: true
+    },
+    assignedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        require: true
+    },
+    projectId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Project',
         require: true
     },
     dueDate: {
