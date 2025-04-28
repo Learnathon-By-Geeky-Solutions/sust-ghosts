@@ -4,6 +4,7 @@ import LandingPage from "./components/Landing Page/LandingPage";
 import LoginPage from "./components/Login Page/Login";
 import SignUpPage from "./components/Sign Up Page/SignUp";
 import Homepage from "./components/HomePage/Homepage";
+import DashboardLayout from "./components/DashBoardLayout/DashboardLayout";
 
 const App = () => {
   return (
