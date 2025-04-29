@@ -31,12 +31,12 @@ const signup = async(req,res) => {
 const login = async(req,res) => {
     try{
         const user = await findUser(req.body.email);
-        console.log(user)
+        console.log(" = ", user)
         if(user && user.length>0){
             const isValidePassword = await bcrypt.compare(req.body.password,user[0].password)
             
             if(isValidePassword){
-                console.log(process.env.JWT_SECRET)
+                // console.log(process.env.JWT_SECRET)
                 // generate token
                 const token = jwt.sign({
                     fullname: user[0].fullname,
