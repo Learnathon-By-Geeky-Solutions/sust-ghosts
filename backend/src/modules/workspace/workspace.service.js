@@ -1,4 +1,4 @@
-const { createNewWorkspace, addMember, workspaceDelete , addTeam} = require('./workspace.repository');
+const { createNewWorkspace, findworkspace, addMember, workspaceDelete , addTeam} = require('./workspace.repository');
 const { findUserByMail } = require('../user/user.utility');
 
 const createWorkspace = async (workspace) => {
@@ -29,6 +29,23 @@ const createWorkspace = async (workspace) => {
         // res.status(500).json({ error: 'Server error' });
     }
 };
+const findWorkspace = async(req, res)=>{
+    try{
+        const { workspaceOwner } = req.body;
+        const users = await findUserByMail(workspaceOwner);
+        const user = users[0];
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        const findWorkspace = await findworkspace(user._id);
+        console.log(findWorkspace)
+        res.status(200).json({ message: 'Workspace found successfully', workspace: findWorkspace });
+    }
+    catch(error){
+        console.error(error);
+        // res.status(500).json({ error: 'Server error' });
+    }
+}   
 const addMemberInWorkspace = async(req, res)=>{
     try {
         const { workspaceOwner, workspaceName, newMember} = req.body;
@@ -86,4 +103,4 @@ const addTeamInWorkspace = async(workspaceOwnerId,teamId) => {
     }
 
 }
-module.exports = { createWorkspace, addMemberInWorkspace, deleteWorkspace, addTeamInWorkspace };
+module.exports = { createWorkspace,findWorkspace, addMemberInWorkspace, deleteWorkspace, addTeamInWorkspace };

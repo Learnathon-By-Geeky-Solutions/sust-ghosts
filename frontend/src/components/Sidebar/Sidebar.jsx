@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   FaHome,
   FaInbox,
@@ -15,6 +16,7 @@ import {
 } from "react-icons/fa";
 
 export default function Sidebar() {
+  const navigate = useNavigate();
   // Dropdown states
   const [teamOpen, setTeamOpen] = useState(true);
   const [projectssOpen, setProjectssOpen] = useState(false);
@@ -43,6 +45,14 @@ export default function Sidebar() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [workspaceMenuOpen]);
+
+  const handleHomeClick = () => {
+    navigate('/main-home');
+  };
+
+  const handleProjectClick = (projectName) => {
+    navigate('/home', { state: { projectName } });
+  };
 
   return (
     <aside className="flex flex-col h-screen bg-[#23272f] border-r border-[#222] w-[260px] min-w-[260px] max-w-[260px] shadow-lg">
@@ -113,7 +123,10 @@ export default function Sidebar() {
       {/* Main menu */}
       <nav className="flex-1 overflow-y-auto px-2 py-4">
         {/* Home */}
-        <div className="flex items-center mb-1 cursor-pointer hover:bg-[#232b3e] p-2 rounded transition text-white gap-3">
+        <div
+          className="flex items-center mb-1 cursor-pointer hover:bg-[#232b3e] p-2 rounded transition text-white gap-3"
+          onClick={handleHomeClick}
+        >
           <FaHome className="text-[#b0b0b0]" />
           <span className="text-[15px]">Home</span>
         </div>
@@ -162,9 +175,8 @@ export default function Sidebar() {
           </button>
           {/* Team Space Children */}
           <div
-            className={`ml-6 overflow-hidden transition-all duration-300 ${
-              teamOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-            }`}
+            className={`ml-6 overflow-hidden transition-all duration-300 ${teamOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+              }`}
           >
             {/* projectss Dropdown */}
             <button
@@ -182,11 +194,10 @@ export default function Sidebar() {
             </button>
             {/* projectss Children */}
             <div
-              className={`ml-6 overflow-hidden transition-all duration-300 ${
-                projectssOpen
-                  ? "max-h-[500px] opacity-100"
-                  : "max-h-0 opacity-0"
-              }`}
+              className={`ml-6 overflow-hidden transition-all duration-300 ${projectssOpen
+                ? "max-h-[500px] opacity-100"
+                : "max-h-0 opacity-0"
+                }`}
             >
               <div className="flex items-center gap-2 text-white mb-1 cursor-pointer hover:bg-[#232b3e] p-2 rounded">
                 <FaFileAlt />
@@ -214,19 +225,27 @@ export default function Sidebar() {
             </button>
             {/* Projects Children */}
             <div
-              className={`ml-6 overflow-hidden transition-all duration-300 ${
-                projectsOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-              }`}
+              className={`ml-6 overflow-hidden transition-all duration-300 ${projectsOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                }`}
             >
-              <div className="flex items-center gap-2 text-white mb-1 cursor-pointer hover:bg-[#232b3e] p-2 rounded">
+              <div
+                className="flex items-center gap-2 text-white mb-1 cursor-pointer hover:bg-[#232b3e] p-2 rounded"
+                onClick={() => handleProjectClick('Project 1')}
+              >
                 <FaFileAlt />
                 <span>Project 1</span>
               </div>
-              <div className="flex items-center gap-2 text-white mb-1 cursor-pointer hover:bg-[#232b3e] p-2 rounded">
+              <div
+                className="flex items-center gap-2 text-white mb-1 cursor-pointer hover:bg-[#232b3e] p-2 rounded"
+                onClick={() => handleProjectClick('Project 2')}
+              >
                 <FaFileAlt />
                 <span>Project 2</span>
               </div>
-              <div className="flex items-center gap-2 text-white mb-1 cursor-pointer hover:bg-[#232b3e] p-2 rounded">
+              <div
+                className="flex items-center gap-2 text-white mb-1 cursor-pointer hover:bg-[#232b3e] p-2 rounded"
+                onClick={() => handleProjectClick('Project 3')}
+              >
                 <FaFileAlt />
                 <span>Project 3</span>
               </div>
@@ -305,9 +324,8 @@ export default function Sidebar() {
                       (role) => (
                         <div
                           key={role}
-                          className={`flex flex-col px-4 py-2 cursor-pointer hover:bg-[#232b3e] ${
-                            selectedRole === role ? "bg-[#232b3e]" : ""
-                          }`}
+                          className={`flex flex-col px-4 py-2 cursor-pointer hover:bg-[#232b3e] ${selectedRole === role ? "bg-[#232b3e]" : ""
+                            }`}
                           onClick={() => {
                             setSelectedRole(role);
                             setRoleDropdown(false);

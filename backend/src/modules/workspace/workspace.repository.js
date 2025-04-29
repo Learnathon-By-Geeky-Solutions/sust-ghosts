@@ -15,6 +15,12 @@ const createNewWorkspace = async (workspaceData) => {
     return await workspace.save();
 };
 
+const findworkspace = async(Owner) => {
+    const findWorkspace = await Workspace.findOne({workspaceOwner: Owner})
+    console.log(findWorkspace)
+    return findWorkspace
+}
+
 const addMember = async(workspace) => {
     const findWorkspace = await Workspace.findOne({workspaceOwner: workspace.workspaceOwner, workspaceName: workspace.workspaceName})
     console.log(findWorkspace)
@@ -41,4 +47,4 @@ const addTeam = async(team_id, user_id) => {
     console.log(updated)
     return updated
 }
-module.exports = { createNewWorkspace , addMember, workspaceDelete,addTeam};
+module.exports = { createNewWorkspace ,findworkspace, addMember, workspaceDelete,addTeam};
