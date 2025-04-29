@@ -7,6 +7,7 @@ import SignUpPage from "./components/Sign Up Page/SignUp";
 import Homepage from "./components/HomePage/Homepage";
 import DashboardLayout from "./components/DashBoardLayout/DashboardLayout";
 import MainHomePage from "./components/Main HomePage/MainHomePage";
+import Board from "./components/Board/Board";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/home" element={<Homepage />} />
         <Route path="/main-home" element={<MainHomePage />} />
+        <Route path="/board" element={<Board />} />
       </Routes>
     </UserProvider>
   );
